@@ -20,14 +20,8 @@ if(data){
     let tasks = localStorage.getItem('tasks').split(',');
 
     for (let i = 0; i < tasks.length; i++) {
-        const day = new Date().getDate();
-        const month = new Date().getMonth();
-        const year = new Date().getFullYear();
-        const combine = [day, month, year];
-        const dayNowr = combine.join('/');
         const dayNow = new Date();
         console.log(dayNow);
-        const date = new Date().toLocaleDateString('en-US');
         const tasksLIST = localStorage.getItem('tasks').split(',');
         const dueedateSTR = getDueDate(tasksLIST[i]);
         console.log(dueedateSTR);
@@ -35,15 +29,26 @@ if(data){
         const dueDate = new Date(dueDateA);
         let difference = dueDateA.getTime() - dayNow.getTime();
         let daysUntilDue = difference/(1000 * 3600 * 24);
-        console.log(dueDateA.getTime() - dayNow.getTime());
-        console.log(dayNow.getTime());
-        console.log(difference);
-        console.log(dueDateA.getTime());
+        let status = null;
+        if(daysUntilDue <= 7 && daysUntilDue > 2){
+            status = 'bg-warning';
+        }else if(daysUntilDue <= 2 && daysUntilDue > 0){
+            status = 'bg-danger';
+        }else if(daysUntilDue < 0){
+            status = 'bg-light';
+        }else{
+            status = 'bg-success';
+        }
         console.log(daysUntilDue);
-        console.log(dayNow);
-        console.log(dueDate);
+        console.log(dueDateA);
+        // console.log(dueDateA.getTime() - dayNow.getTime());
+        // console.log(dayNow.getTime());
+        // console.log(difference);
+        // console.log(dueDateA.getTime());
+        // console.log(daysUntilDue);
+        // console.log(dayNow);
+        // console.log(dueDate);
 
-        let status = 'bg-success';
         
         let duedateArray = localStorage.getItem('tasks').split(',');
         
@@ -59,7 +64,7 @@ if(data){
        col1.insertAdjacentHTML('beforeend', card);     
     }
 }else{
-    let list = ['test', 'test2'];
+    let list = [];
     localStorage.setItem('tasks', list);
 }
 

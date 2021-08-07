@@ -17,6 +17,10 @@
             display:flex;
             justify-content: space-between;
         }
+        #indicators{
+            border: 2px black solid;
+            border-radius: 10px;
+        }
     </style>
     
 </head>
@@ -35,12 +39,40 @@
                     </div>
                 </div> -->
             </div>
-            <div class="col sm-9">
+            <div class="col sm-6">
                 <label for="inserttask" id="label1" class="form-label">Insert a new task</label>
                 <input type="text" placeholder="Name" class="form-control mb-2" id="inserttask">
-                <label for="" class="form-label" >Please use slashes to determine the due date. Example: 14 January 2010 as 14/1/2010</label>
+                <label for="" class="form-label" >Please use slashes to determine the due date. Example: 14 January 2010 as 1/14/2010</label>
                 <input type="text" placeholder="Due date" class="form-control" id="due">
                 <button type="submit" class="btn btn-primary mt-3" id="submit-button">Submit</button>
+                <p class="mt-2">Note: Please refresh every time you clicked done or submit.</p>
+            </div>
+            <div class="col sm-4" id="indicators">
+                <h3>Indicators:</h3>
+                <div class="card bg-success mt-3">
+                    <div class="card-body cards">
+                        <h5>Green</h5>
+                        <h5>Due in over 1 week</h5>
+                    </div>
+                </div>
+                <div class="card bg-warning mt-3">
+                    <div class="card-body cards">
+                        <h5>Yellow</h5>
+                        <h5>Due in 1 week or lower</h5>
+                    </div>
+                </div>
+                <div class="card bg-danger mt-3">
+                    <div class="card-body cards">
+                        <h5>Red</h5>
+                        <h5>Due in 2 days or lower</h5>
+                    </div>
+                </div>
+                <div class="card bg-light mt-3">
+                    <div class="card-body cards">
+                        <h5>White</h5>
+                        <h5>Past due</h5>
+                    </div>
+                </div>
             </div>
         </div>
         
