@@ -82,7 +82,60 @@ donebutton.forEach(element => {
         tasks.splice(indexval, 1);
         localStorage.setItem('tasks', tasks);
         console.log('Removal success.');
-        alert('Removed successfully. Please reload the page');
+        const paras = document.getElementsByClassName('card');
+        // remove the cards
+        while(paras[0]) {
+            paras[0].parentNode.removeChild(paras[0]);
+        }
+        // add the cards
+        tasks = localStorage.getItem('tasks').split(',');
+
+        for (let i = 0; i < tasks.length; i++) {
+            const dayNow = new Date();
+            console.log(dayNow);
+            const tasksLIST = localStorage.getItem('tasks').split(',');
+            const dueedateSTR = getDueDate(tasksLIST[i]);
+            console.log(dueedateSTR);
+            const dueDateA = new Date(dueedateSTR);
+            const dueDate = new Date(dueDateA);
+            let difference = dueDateA.getTime() - dayNow.getTime();
+            let daysUntilDue = difference/(1000 * 3600 * 24);
+            let status = null;
+            if(daysUntilDue <= 7 && daysUntilDue > 2){
+                status = 'bg-warning';
+            }else if(daysUntilDue <= 2 && daysUntilDue > 0){
+                status = 'bg-danger';
+            }else if(daysUntilDue < 0){
+                status = 'bg-light';
+            }else{
+                status = 'bg-success';
+            }
+            console.log(daysUntilDue);
+            console.log(dueDateA);
+            // console.log(dueDateA.getTime() - dayNow.getTime());
+            // console.log(dayNow.getTime());
+            // console.log(difference);
+            // console.log(dueDateA.getTime());
+            // console.log(daysUntilDue);
+            // console.log(dayNow);
+            // console.log(dueDate);
+    
+            
+            let duedateArray = localStorage.getItem('tasks').split(',');
+            
+            const card = `
+            <div class="card ${status} mt-3">
+                <div class="card-body cards">
+                    <h5>${tasks[i]}</h5>
+                    <h5>Due date: ${getDueDate(duedateArray[i])}</h5>
+                    <button class="btn btn-primary donebutton" type="submit">Done</button>
+                </div>
+            </div>
+            `
+           col1.insertAdjacentHTML('beforeend', card);     
+        }
+        // finished adding the cards
+        alert('Successfully removed.')
     });
 })
 
